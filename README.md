@@ -24,3 +24,5 @@
 ## 网页设计参考 refer to
 https://github.com/ybsdegit/Keras_flask_mnist
 
+## 效果如下：
+![image](https://github.com/Windxy/torch_mnist_flask/blob/main/static/show.jpg)
