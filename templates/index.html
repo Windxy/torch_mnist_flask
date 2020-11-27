@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>手写数字识别</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+		<h1>第三次课程实验：卷积神经网络 & MNIST</h1>
+		<div class="centered">
+			<canvas id="canvas" width="80" height="80"></canvas>
+		</div>
+
+		<div class="centered">
+			<canvas width="80" height="80"></canvas>
+		</div>
+
+		<div class="centered">
+			<input type="button" class="myButton" value="预测" style="">
+			<input type="button" id="clearButton" value="清除" style="">
+		</div>
+
+		<div class="centered">
+			<h1 id="result"></h1>
+		</div>
+
+  		<script src="{{url_for('static',filename='jquery-3.2.0.min.js')}}"></script>
+	    <script src="{{url_for('static',filename='index.js')}}"></script>
+
+	    <script type="text/javascript">
+	   		$(".myButton").click(function(){
+	   			$('#result').text('  Predicting...');
+	   			var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+	   			var canvasObj = document.getElementById("canvas");
+	   			var img = canvasObj.toDataURL('image/png');
+	   			$.ajax({
+	   				type: "POST",
+	   				url: $SCRIPT_ROOT + "/predict/",
+	   				data: img,
+	   				success: function(data){
+	   					$('#result').text('预测结果: ' + data);
+	   				}
+	   			});
+	   		}
+	   	);
+	   </script>
+</body>
+</html>
